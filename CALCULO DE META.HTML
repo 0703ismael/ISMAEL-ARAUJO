@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Bônus Proporcional</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #eaeaea;
+    }
+
+    input {
+      width: 100%;
+      padding: 5px;
+      text-align: right;
+    }
+
+    .total-inputs {
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Planilha de Cálculo de Bônus Proporcional</h2>
+
+  <div class="total-inputs">
+    <label>Total Produção Filial (R$): <input type="number" id="producaoTotalFilial" step="0.01"></label><br><br>
+    <label>Total Bônus da Filial (R$): <input type="number" id="bonusTotalFilial" step="0.01"></label>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Colaborador</th>
+        <th>Produção Bimestre (R$)</th>
+        <th>Bônus Calculado (R$)</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaColaboradores">
+      <tr>
+        <td><input type="text" value="Jackeline Soares"></td>
+        <td><input type="number" class="producao" value="108850.15" step="0.01"></td>
+        <td><input type="text" class="bonus" readonly></td>
+      </tr>
+      <tr>
+        <td><input type="text" value="Ismael Oliveira"></td>
+        <td><input type="number" class="producao" value="116410.08" step="0.01"></td>
+        <td><input type="text" class="bonus" readonly></td>
+      </tr>
+      <tr>
+        <td><input type="text" value="Adalto Sousa"></td>
+        <td><input type="number" class="producao" value="111257.18" step="0.01"></td>
+        <td><input type="text" class="bonus" readonly></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button onclick="calcularBonus()">Calcular Bônus</button>
+
+  <script>
+    function calcularBonus() {
+      const producaoTotalFilial = parseFloat(document.getElementById('producaoTotalFilial').value);
+      const bonusTotalFilial = parseFloat(document.getElementById('bonusTotalFilial').value);
+
+      const producoes = document.querySelectorAll('.producao');
+      const bonusCampos = document.querySelectorAll('.bonus');
+
+      if (!producaoTotalFilial || !bonusTotalFilial) {
+        alert('Preencha os valores totais da produção e bônus da filial.');
+        return;
+      }
+
+      producoes.forEach((input, index) => {
+        const producao = parseFloat(input.value);
+        const bonus = (producao * bonusTotalFilial) / producaoTotalFilial;
+        bonusCampos[index].value = bonus.toFixed(2).replace('.', ',');
+      });
+    }
+  </script>
+</body>
+</html>

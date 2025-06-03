@@ -1,0 +1,618 @@
+:root {
+    /* Cores para o Light Mode (Vibrante e Limpo) */
+    --primary-color: #C0C0C0; /* Um roxo profundo e vibrante */
+    --secondary-color: #008080; /* Um Verde mais escuro */
+    --accent-color: #66CDAA;
+    --dark-bg: #1f1f38; /* Quase preto para o header/footer */
+    --light-bg:#2F4F4F; /* Fundo forte e claro */
+    --text-color: #333;
+    --white-color: #f2f3f5;
+    --card-bg: #4682B4;
+    --card-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 5px;
+    --input-border: #ddd;
+    --input-focus-shadow: rgba(106, 5, 114, 0.2);
+    --active-nav-color: var(--accent-color);
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --light-bg: ##A9A9A9;/* Fundo muito escuro */
+    --dark-bg: #386469; /* Elementos mais escuros */
+    --text-color: #efedf2; /* Texto claro */
+    --white-color: #f2f3f5; /* Elementos antes brancos, agora escuros */
+    --card-bg: #1f87ad; /* Fundo do card no dark mode */
+    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    --input-border: #f0f714eb;
+    --input-focus-shadow: rgba(255, 193, 7, 0.3); /* Sombra amarela no foco */
+    --primary-color: #0cf7b5; /* Cores principais ajustadas para o dark mode */
+    --secondary-color: #6a0572;
+    --accent-color: #FFD700; /* Amarelo mais vibrante */
+    --active-nav-color: var(--accent-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5; /* Mais espaço entre linhas */
+    background: var(--light-bg);
+    color: var(--text-color);
+    overflow-x: hidden;
+    transition: background 0.7s ease, color 0.7s ease; /* Transição mais suave para o Dark Mode */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+    background: var(--dark-bg);
+    color: var(--white-color);
+    padding: 1.2rem 2rem; /* Adjusted padding */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav h1 {
+    font-family: 'Montserrat', sans-serif; /* Changed font to Montserrat as per import */
+    font-size: 2rem; /* Diminuir um pouco */
+    font-weight: 800; /* Mais bold */
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+nav .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem; /* Menos espaço */
+}
+
+nav ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+    font-weight: 300;
+    padding: 0.5rem 0;
+    position: relative; /* Para o efeito de sublinhado animado */
+    transition: color 0.3s ease;
+}
+
+nav ul li a::after { /* Efeito de sublinhado animado */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 5px;
+    background: var(--accent-color);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease-out;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 50%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--active-nav-color);
+}
+
+/* Dark Mode Toggle */
+#dark-mode-toggle {
+    background: none;
+    border: none;
+    color: var(--white-color);
+    font-size: 1.2rem; /* Ícone menor */
+    cursor: pointer;
+    margin-left: 1rem; /* Mais espaçamento */
+    transition: color 0.3s ease, transform 0.2s ease;
+    outline: none; /* Remove a borda de foco padrão */
+}
+
+#dark-mode-toggle:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+#dark-mode-toggle i {
+    pointer-events: none;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    color: var(--white-color);
+    text-align: center;
+    padding: 6rem 1rem; /* Mais padding */
+    min-height: 30vh; /* Ocupa mais tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 10px 10px rgba(0,0,0,0.2); /* Sombra interna sutil */
+}
+
+.hero::before { /* Overlay sutil */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Changed from 110% to 100% */
+    height: 100%;
+    background: rgba(0, 0, 0, 0.19); /* Mais escuro */
+    z-index: 3;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 2.5rem; /* Slightly reduced for better fit on various screens */
+    margin-bottom: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap; /* Keep it on one line for animation */
+    overflow: hidden;
+    border-right: .15em solid var(--accent-color);
+    animation: typing 6.5s steps(40, end) forwards, blink-caret .75s step-end infinite;
+    max-width: 100%; /* Ensures it fits within its container */
+    display: inline-block; /* Essential for typing animation to work correctly with max-width */
+}
+
+.hero h2 span {
+    color: var(--accent-color);
+    display: inline;
+}
+
+/* Animação de digitação */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% } /* Changed to 100% to fit content width */
+}
+
+/* Animação do cursor */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--accent-color); }
+}
+
+.hero p {
+    font-size: 1.4rem; /* Texto maior */
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    max-width: 700px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 1.1rem 3rem; /* Botão maior */
+    background: var(--accent-color); /* Cor de destaque */
+    color: var(--dark-bg); /* Texto escuro no botão claro */
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
+}
+
+.btn:hover {
+    transform: translateY(-5px); /* Efeito mais pronunciado */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    background: var(--secondary-color); /* Muda para a cor secundária no hover */
+    color: var(--white-color); /* Texto branco */
+}
+
+/* Sections */
+section {
+    padding: 5rem 1.5rem; /* Mais padding */
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    transition: background 0.7s ease, color 0.7s ease;
+}
+
+section:nth-of-type(even) {
+    background-color: var(--card-bg); /* Use card-bg para fundo de seções pares no light mode */
+}
+body.dark-mode section:nth-of-type(even) {
+     background-color: var(--dark-bg); /* Fundo mais escuro para seções pares no dark mode */
+}
+
+section h2 {
+    font-size: 3rem; /* Título maior */
+    margin-bottom: 3rem; /* Mais espaçamento */
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 15px;
+    transition: color 0.5s ease;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Sublinhado maior */
+    height: 5px; /* Mais espesso */
+    background: var(--accent-color);
+    border-radius: 3px;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* About Section */
+#sobre .about-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    text-align: left;
+    flex-wrap: wrap; /* Para responsividade */
+    justify-content: center;
+}
+
+#sobre .about-text {
+    flex: 1;
+    min-width: 300px; /* Para não ficar muito estreito em telas menores */
+}
+
+#sobre p {
+    font-size: 1.15rem;
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto; /* Ajuste para o about-text */
+    color: var(--text-color);
+    transition: color 0.5s ease;
+}
+
+#sobre .profile-image {
+    flex-shrink: 0; /* Impede que a imagem encolha */
+    width: 250px; /* Tamanho fixo para a imagem */
+    height: 250px;
+    border-radius: 50%; /* Imagem redonda */
+    overflow: hidden;
+    border: 5px solid var(--primary-color); /* Borda colorida */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#sobre .profile-image:hover {
+    transform: scale(1.05); /* Zoom sutil no hover */
+    border-color: var(--accent-color);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+#sobre .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    display: block;
+}
+
+/* Projects Section */
+#projetos .projetos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Cards um pouco maiores */
+    gap: 2.5rem; /* Mais espaçamento */
+    margin-top: 3rem;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 2.2rem; /* Mais padding */
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease, color 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Efeito mais pronunciado */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+.card h3 {
+    font-size: 1.6rem; /* Título do card maior */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.card p {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    margin-bottom: 1.8rem;
+    transition: color 0.5s ease;
+}
+
+.card a {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    background: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 6px; /* Mais arredondado */
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card a:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Contact Section */
+#contato {
+    text-align: center;
+}
+
+#contato p {
+    font-size: 1.15rem;
+    margin-bottom: 1.8rem;
+    color: var(--text-color);
+    transition: color 0.5s ease;
+}
+
+#contato .contact-info {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+#contato .contact-info p {
+    font-size: 1.2rem; /* Info de contato maior */
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    transition: color 0.5s ease;
+}
+#contato .contact-info p i {
+    color: var(--primary-color);
+    margin-right: 10px;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Mais espaçamento no formulário */
+    max-width: 600px; /* Formulário um pouco mais largo */
+    margin: 0 auto;
+    padding: 2.5rem; /* Mais padding */
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: all 0.5s ease;
+}
+
+form input,
+form textarea {
+    padding: 1.2rem; /* Inputs maiores */
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.5s ease, color 0.5s ease;
+    background: var(--light-bg);
+    color: var(--text-color);
+}
+
+body.dark-mode form input,
+body.dark-mode form textarea {
+    background: var(--dark-bg); /* Inputs no dark mode */
+}
+
+
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--input-focus-shadow); /* Sombra de foco mais visível */
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 150px; /* Textarea maior */
+}
+
+form button {
+    padding: 1.2rem;
+    background: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+form button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem; /* Mais padding */
+    background: var(--dark-bg);
+    color: var(--white-color);
+    font-size: 1rem;
+    margin-top: 4rem; /* Mais margem */
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    nav ul {
+        gap: 1rem;
+    }
+    nav ul li a {
+        font-size: 0.9rem;
+    }
+    #dark-mode-toggle {
+        font-size: 1.3rem;
+        margin-left: 1rem;
+    }
+    .hero h2 {
+        font-size: 2.2rem; /* Adjusted for smaller screens */
+        animation: typing 4.5s steps(40, end) forwards, blink-caret .75s step-end infinite; /* Adjusted duration */
+        white-space: normal; /* Allow text to wrap on smaller screens */
+        word-break: break-word; /* Prevents long words from overflowing */
+        max-width: 90%; /* Ensures it takes up sufficient width while wrapping */
+    }
+    .hero p {
+        font-size: 1.2rem;
+    }
+    section h2 {
+        font-size: 2.5rem;
+    }
+    #sobre .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    #sobre .profile-image {
+        margin-bottom: 2rem;
+    }
+    #projetos .projetos-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    nav h1 {
+        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+    }
+    nav .nav-right {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    #dark-mode-toggle {
+        margin-left: 0;
+    }
+
+    .hero {
+        padding: 6rem 1rem;
+        min-height: 60vh;
+    }
+    .hero h2 {
+        font-size: 1.8rem; /* Further adjustment for even smaller screens */
+        animation: typing 3.5s steps(30, end) forwards, blink-caret .75s step-end infinite; /* Adjusted duration */
+        white-space: normal;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 3rem 1rem;
+    }
+
+    section h2 {
+        font-size: 2rem;
+    }
+
+    .card {
+        padding: 1.8rem;
+    }
+    .card h3 {
+        font-size: 1.4rem;
+    }
+    .card p {
+        font-size: 0.95rem;
+    }
+
+    form {
+        padding: 2rem;
+    }
+    form input, form textarea {
+        padding: 1rem;
+    }
+    form button {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1rem;
+    }
+
+    nav h1 {
+        font-size: 1.6rem;
+    }
+
+    nav ul {
+        gap: 0.8rem;
+    }
+    nav ul li a {
+        font-size: 0.8rem;
+    }
+
+    .hero h2 {
+        font-size: 1.4rem; /* Final adjustment for very small screens */
+        animation: typing 3s steps(25, end) forwards, blink-caret .75s step-end infinite; /* Adjusted duration */
+        white-space: normal;
+    }
+    .hero p {
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.9rem;
+    }
+
+    section h2 {
+        font-size: 1.6rem;
+    }
+    #sobre .profile-image {
+        width: 180px;
+        height: 180px;
+    }
+    #sobre p {
+        font-size: 1rem;
+    }
+    #contato .contact-info p {
+        font-size: 1rem;
+    }
+}

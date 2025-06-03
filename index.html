@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfólio - Ismael de Araújo Silva Oliveira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <header>
+        <nav>
+            <h1>Ismael de Araújo Silva Oliveira</h1>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <button id="dark-mode-toggle" aria-label="Alternar modo escuro">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Olá, eu sou <span>Ismael de Araújo Silva Oliveira</span></h2>
+        <p>Desenvolvedor Front-End | UX/UI Designer | Freelancer</p>
+        <a href="#contato" class="btn">Fale Comigo</a>
+    </section>
+
+    <section id="sobre" data-aos="fade-up">
+        <h2>Sobre Mim</h2>
+        <div class="about-content">
+            <div class="profile-image">
+                <img src="ismael.araujo.jpg" alt="ismael.araujo"> </div>
+            <div class="about-text">
+                <p>Sou apaixonado por criar experiências digitais bonitas e funcionais. Com uma mente criativa e um olhar atento aos detalhes, transformo ideias complexas em interfaces intuitivas e envolventes.</p>
+                <p>Minha jornada na área de desenvolvimento Front-End e UX/UI Design me permite não só construir soluções robustas com HTML, CSS e JavaScript, mas também garantir que elas ofereçam uma experiência de usuário impecável.</p>
+                <p>Como freelancer, busco sempre aprimorar minhas habilidades e colaborar em projetos desafiadores que impactam positivamente as pessoas. Vamos construir algo incrível juntos?</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos">
+        <h2>Meus Projetos</h2>
+        <div class="projetos-container">
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Projeto 1 - Planilha de Cálculo de Bônus Proporcional</h3>
+                <p>Ferramenta interativa para calcular o bônus de colaboradores com base na produção individual e total da filial, otimizando a distribuição de incentivos de forma justa e transparente.</p>
+                <a href="CALCULO DE META.HTML">Ver Projeto <i class="fas fa-external-link-alt"></i></a> </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Projeto 2 - Calculadora</h3>
+                <p>Uma calculadora funcional e intuitiva, desenvolvida com HTML, CSS e JavaScript, ideal para operações matemáticas do dia a dia. Simples, mas demonstra lógica e interação.</p>
+                <a href="ubdex.html"_blank">Ver Projeto <i class="fas fa-external-link-alt"></i></a> </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Projeto 3 - Lista de Supermercado</h3>
+                <p>Uma lista de supermercado interativa que simplifica a organização das compras, facilitando a escolha de produtos e a gestão do seu carrinho. Projeto feito usando HTML, CSS e JavaScript para praticidade.</p>
+                <a href="supermecado (1) (3).html" target="_blank">Ver Projeto <i class="fas fa-external-link-alt"></i></a> </div>
+        </div>
+    </section>
+
+    <section id="contato"data-aos="fade-up">
+        <h2>Fale Comigo</h2>
+        <p>Estou sempre aberto a novas oportunidades, colaborações e a transformar suas ideias em realidade. Não hesite em entrar em contato!</p>
+
+        <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> <strong>E-mail:</strong> ismaelaraujo0703@gmail.com</p>
+            <p><i class="fas fa-phone-alt"></i> <strong>Telefone:</strong> (99) 9208-7256</p>
+            <p>
+                <a href="https://linkedin.com/in/seu-perfil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x" style="color: var(--primary-color); margin-right: 15px;"></i></a>
+                <a href="https://github.com/seu-usuario" target="_blank" aria-label="GitHub"><i class="fab fa-github-square fa-2x" style="color: var(--primary-color);"></i></a>
+            </p>
+        </div>
+
+        <form action="https://formsubmit.co/ismaelaraujo0703@gmail.com" method="POST">
+            <input type="text" name="name" placeholder="Seu nome completo" required />
+            <input type="email" name="email" placeholder="Seu melhor email" required />
+            <textarea name="message" placeholder="Sua mensagem detalhada" required></textarea>
+            <button type="submit">Enviar Mensagem</button>
+
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ismael de Araújo Silva Oliveira. Todos os direitos reservados. Feito com paixão pelo desenvolvimento web.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script> </body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Compras - Supermercado</title>
+  <p>Compre com Confiança, Pague com Certeza</p>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .table-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .products-table, .cart-table {
+      width: 48%;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 2px solid #008080;
+    }
+
+    th {
+      background-color: #008080;
+      color: white;
+    }
+
+    td button {
+      padding: 5px 10px;
+      background-color: #008080;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    td button:hover {
+      background-color: #45a049;
+    }
+
+    .cart-summary {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-summary p {
+      font-size: 17px;
+    }
+
+    .add-product {
+      margin-bottom: 30px;
+      background-color: #fff;
+      padding: 15px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-product input {
+      margin-right: 10px;
+      padding: 5px;
+    }
+
+    .add-product button {
+      padding: 5px 10px;
+      background-color: #008080;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .add-product button:hover {
+      background-color: #45a049;
+    }
+
+    input[type="number"] {
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Lista de Compras - Supermercado</h1>
+
+  <!-- Formulário para adicionar novos produtos -->
+  <div class="add-product">
+    <h3>Adicionar novo produto</h3>
+    <input type="text" id="newProductName" placeholder="Nome do produto" />
+    <input type="number" id="newProductPrice" placeholder="Preço" step="0.01" min="0" />
+    <button onclick="addNewProduct()">Adicionar à lista</button>
+  </div>
+
+  <div class="table-container">
+    <!-- Tabela de Produtos -->
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody id="productTable"></tbody>
+    </table>
+
+    <!-- Tabela do Carrinho -->
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço (R$)</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody id="cartTable"></tbody>
+    </table>
+  </div>
+
+  <!-- Resumo do carrinho -->
+  <div class="cart-summary">
+    <p><strong>Total:</strong> R$ <span id="totalPrice">0.00</span></p>
+  </div>
+</div>
+
+<script>
+  const products = [
+    { name: 'Arroz', price: 7.50 },
+    { name: 'Feijão', price: 7.50 },
+    { name: 'Macarrão', price: 4.00 },
+    { name: 'Óleo', price: 6.30 },
+    { name: 'Café', price: 10.00 },
+    { name: 'Leite', price: 5.20 }
+  ];
+
+  let cart = [];
+  let total = 0;
+
+  function loadProducts() {
+    const productTable = document.getElementById('productTable');
+    productTable.innerHTML = '';
+    products.forEach((product, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${product.name}</td>
+        <td>R$ ${product.price.toFixed(2)}</td>
+        <td><button onclick="addToCart(${index})">Adicionar</button></td>
+      `;
+      productTable.appendChild(row);
+    });
+  }
+
+  function addToCart(index) {
+    const product = products[index];
+    cart.push({ ...product });
+    total += product.price;
+    updateCart();
+  }
+
+  function removeFromCart(index) {
+    total -= cart[index].price;
+    cart.splice(index, 1);
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartTable = document.getElementById('cartTable');
+    const totalPrice = document.getElementById('totalPrice');
+    cartTable.innerHTML = '';
+
+    cart.forEach((product, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${product.name}</td>
+        <td>
+          <input type="number" step="0.01" min="0" value="${product.price.toFixed(2)}" onchange="editPrice(${index}, this.value)">
+        </td>
+        <td><button onclick="removeFromCart(${index})">Remover</button></td>
+      `;
+      cartTable.appendChild(row);
+    });
+
+    totalPrice.innerText = total.toFixed(2);
+  }
+
+  function editPrice(index, newValue) {
+    const oldPrice = cart[index].price;
+    const newPrice = parseFloat(newValue);
+
+    if (!isNaN(newPrice) && newPrice >= 0) {
+      cart[index].price = newPrice;
+      total = total - oldPrice + newPrice;
+      updateCart();
+    }
+  }
+
+  function addNewProduct() {
+    const nameInput = document.getElementById('newProductName');
+    const priceInput = document.getElementById('newProductPrice');
+    const name = nameInput.value.trim();
+    const price = parseFloat(priceInput.value);
+
+    if (name && !isNaN(price) && price >= 0) {
+      products.push({ name, price });
+      nameInput.value = '';
+      priceInput.value = '';
+      loadProducts();
+    } else {
+      alert("Preencha corretamente o nome e o preço do produto.");
+    }
+  }
+
+  // Carregar produtos ao iniciar
+  window.onload = loadProducts;
+</script>
+
+</body>
+</html>
